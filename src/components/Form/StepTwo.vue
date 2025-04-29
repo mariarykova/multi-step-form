@@ -7,8 +7,8 @@
             :key="index"
             :icon="service.icon"
             :text="service.text"
-            :active="form.service === index"
-            @click="selectService(index)"
+            :active="isServiceSelected(index)"
+            @click="toggleService(index)"
         />
        
     </div>
@@ -43,9 +43,22 @@ export default {
         }
     },
     methods: {
-        selectService(service) {
-            this.form.service = service
-        }
+        isServiceSelected(serviceIndex) {
+    return this.form.service.some(selected => selected.index === serviceIndex);
+  },
+  toggleService(serviceIndex) {
+    const selectedService = this.services[serviceIndex];
+    const idx = this.form.service.findIndex(selected => selected.index === serviceIndex);
+
+    if (idx > -1) {
+      this.form.service.splice(idx, 1);
+    } else {
+      this.form.service.push({
+        index: serviceIndex,
+        text: selectedService.text,
+      });
+    }
+  }
     }
 }
 

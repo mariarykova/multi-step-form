@@ -7,7 +7,7 @@
     />
      <h2 class="title">Submit your quote request</h2>
      <p class="subtitle">Please review all the information you previously typed in the past steps, and if all is okay, submit your message to receive a project quote in 24 - 48 hours.</p>
-    <button class="submit-btn">Submit</button>
+    <button class="submit-btn" @click="$emit('submit')">Submit</button>
 
     </div>
     

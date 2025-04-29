@@ -8,17 +8,56 @@ export default {
   components: { StepOne, StepTwo, StepThree, StepFour },
   data() {
     return {
-      step: 4,
+      step: 1,
       steps: ['1', '2', '3', '4'],
       formData: {
         name: '',
         email: '',
         phone: '',
         company: '',
-        service: 0,
-        budget: '',
+        service: [],
+        budget: 0,
       }
     }
+  },
+  methods: {
+    nextStep() {
+      // Step 1 validation
+      if (this.step === 1) {
+        if (!this.validateStepOne()) {
+          return;
+        }
+      }
+
+      if (this.step < 4) {
+        this.step++;
+      }
+    },
+    prevStep() {
+      if (this.step > 1) {
+        this.step--;
+      }
+    },
+    validateStepOne() {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^[0-9]{8,15}$/; // 8 to 15 digits
+
+      if (!emailPattern.test(this.formData.email)) {
+        alert('Please enter a valid email address.');
+        return false;
+      }
+      if (!phonePattern.test(this.formData.phone)) {
+        alert('Please enter a valid phone number.');
+        return false;
+      }
+      return true;
+    },
+    submitForm() {
+    localStorage.setItem('projectQuote', JSON.stringify(this.formData));
+    alert('Form submitted successfully! 🎉');
+    this.step = 1;
+    this.formData = { name: '', email: '', phone: '', company: '', service: [], budget: '' };
+  }
   }
 }
 </script>
@@ -32,26 +71,23 @@ export default {
     <div class="form-container">
     <div class="progress-container">
         <div
-            v-for="(s, index) in steps"
-            :key="index"
-            class="progress-step"
+          v-for="(s, index) in steps"
+          :key="index"
+          class="progress-step"
         >
-            <!-- Circle -->
             <div
             class="step"
             :class="{ completed: step > index + 1, active: step === index + 1 }"
             >
             {{ index + 1 }}
             </div>
-
-            <!-- Line (except last step) -->
             <div
             v-if="index < steps.length - 1"
             class="line"
             :class="{
-    filled: step > index + 1,
-    half: step === index + 1
-  }"
+              filled: step > index + 1,
+              half: step === index + 1
+            }"
             ></div>
         </div>
     </div>
@@ -74,12 +110,13 @@ export default {
     <StepFour 
         v-if="step === 4"
         v-model:form="formData"
+        @submit="submitForm"
         >
     </StepFour>
    </div>
    <div class="form-btns">
-    <button class="previous-btn">Previous step</button>
-    <button class="next-btn">Next step</button>
+    <div><button v-show="step > 1" class="previous-btn" @click="prevStep">Previous step</button></div>
+    <div><button v-show="step < 4" class="next-btn" @click="nextStep">Next step</button></div>
    </div>
 </div>
   </div>

@@ -7,24 +7,28 @@
             label="Name"
             type="text"
             placeholder="John Carter"
+            icon="/svg/name.svg"
         />
         <StepOneInput
             v-model="form.email"
             label="Email"
             type="email"
             placeholder="Email address"
+            icon="/svg/email.svg"
         />
         <StepOneInput
             v-model="form.phone"
             label="Phone number"
             type="tel"
             placeholder="(123) 456 - 7890"
+            icon="/svg/phone.svg"
         />
         <StepOneInput
             v-model="form.company"
             label="Company"
             type="text"
             placeholder="Company name"
+            icon="/svg/company.svg"
         />
 
     </div>
