@@ -1,6 +1,5 @@
 :root {
   --font-family: "DM Sans", sans-serif;
-  font-weight: 400;
 
   --neutral-800: #170f49;
   --neutral-700: #514f6e;
@@ -13,34 +12,66 @@
   --primary-color-1: #4a3aff;
   --primary-color-2: #962dff;
   --secondary-color-1: #f3f1ff;
-  
 }
 
 body {
   margin: 0;
   padding: 0;
   background-color: var(--neutral-100);
+  color: var(--neutral-800);
+  font-weight: 400;
+  font-family: var(--font-family);
+  font-size: 18px;
+}
+
+button {
+  font-size: 18px;
+}
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }
 
 .container {
   width: 100%;
-  max-width: 1440px;
-  padding: 50px 100px;
+  max-width: 1240px;
+  padding: 30px 0px;
   margin: 0 auto;
 }
 
 .title {
-  font-family: var(--font-family);
-font-weight: 700;
-font-size: 24px;
-line-height: 146%;
-color: var(--neutral-800);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 146%;
+  color: var(--neutral-800);
 }
 
 .subtitle {
-  font-family: var(--font-family);
-font-weight: 400;
-font-size: 18px;
-line-height: 167%;
-color: var(--neutral-600);
+  font-size: 18px;
+  line-height: 167%;
+  color: var(--neutral-600);
+}
+
+@media (max-width: 1025px) {
+  .container {
+    max-width: 700px;
+  }
+}
+  @media (max-width: 500px) {
+    .title {
+      font-size: 16px;
+    }
+    .subtitle {
+      font-size: 12px
+    }
+
+    .container {
+      max-width: 350px;
+      padding: 25px 0px;
+    }
+    
 }

@@ -40,8 +40,8 @@ export default {
         selectBudget(budgetIndex) {
             const selectedBudget = this.budgets[budgetIndex];
             this.form.budget = {
-            index: budgetIndex,
-            text: selectedBudget.text
+                index: budgetIndex,
+                text: selectedBudget.text
             };
   }
     }

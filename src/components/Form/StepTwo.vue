@@ -10,7 +10,6 @@
             :active="isServiceSelected(index)"
             @click="toggleService(index)"
         />
-       
     </div>
 </template>
 
@@ -44,24 +43,23 @@ export default {
     },
     methods: {
         isServiceSelected(serviceIndex) {
-    return this.form.service.some(selected => selected.index === serviceIndex);
+            return this.form.service.some(selected => selected.index === serviceIndex);
   },
-  toggleService(serviceIndex) {
-    const selectedService = this.services[serviceIndex];
-    const idx = this.form.service.findIndex(selected => selected.index === serviceIndex);
+        toggleService(serviceIndex) {
+            const selectedService = this.services[serviceIndex];
+            const idx = this.form.service.findIndex(selected => selected.index === serviceIndex);
 
-    if (idx > -1) {
-      this.form.service.splice(idx, 1);
-    } else {
-      this.form.service.push({
-        index: serviceIndex,
-        text: selectedService.text,
-      });
-    }
-  }
-    }
+            if (idx > -1) {
+            this.form.service.splice(idx, 1);
+            } else {
+            this.form.service.push({
+                index: serviceIndex,
+                text: selectedService.text,
+            });
+            }
+        }
+            }
 }
-
 </script>
 
 <style scoped>

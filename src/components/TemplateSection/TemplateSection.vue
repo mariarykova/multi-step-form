@@ -12,24 +12,17 @@
             />
 
         <BaseCard
-        logo="./svg/logo-color.svg"
-        title="Looking to design & develop an amazing Webflow website?"
-        text="If you want to get a hand from the amazing team behind BRIX Templates, get in touch with BRIX Agency today."
-        buttonText="Get a quote"
-        image="./images/img-quote.png"
-        @button-click="handleMarketingClick"
-        theme="dark"
+          logo="./svg/logo-color.svg"
+          title="Looking to design & develop an amazing Webflow website?"
+          text="If you want to get a hand from the amazing team behind BRIX Templates, get in touch with BRIX Agency today."
+          buttonText="Get a quote"
+          image="./images/img-quote.png"
+          @button-click="handleMarketingClick"
+          theme="dark"
         />
         </div>
-
         <img src="/images/template-bg.png" alt="background template" class="bg-template" />
-
     </div>
-
-
-    
-   
-
 </template>
 
 <script>
@@ -54,7 +47,7 @@ export default {
     position: relative;
 }
 .template-section {
-    padding: 128px 50px;
+    padding: 128px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,6 +61,21 @@ export default {
     position: absolute;
     bottom: 0;
     right: 0;
-    
+
+}
+
+@media (max-width: 1025px) {
+  .template-section {
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px 0px;
+  }
+  @media (max-width: 500px) {
+  .template-section {
+    gap: 25px;
+    padding: 25px 0px;
+  }
+}
+
 }
 </style>

@@ -50,4 +50,11 @@ export default {
     gap: 1rem;
     justify-content: space-between;
 }
+
+@media (max-width: 500px) {
+    .step-one-container {
+        gap: 0.5rem;
+        justify-content: center;
+}
+}
 </style>

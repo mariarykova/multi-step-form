@@ -12,11 +12,13 @@ export default {
     props: {
         text: {
             type: String,
+            default: 'Default Text',
             required: true
         },
         active: {
             type: Boolean,
-            default: false
+            default: false,
+            required: false
         }
     }
 }
@@ -49,14 +51,29 @@ export default {
     height: 9.7px;
 }
 .text {
-    font-family: var(--font-family);
     font-weight: 500;
-    font-size: 18px;
     line-height: 111%;
     color: var(--neutral-800);
 }
 .card-wrapper.active {
     border: 1px solid var(--primary-color-1);
 }
-    
+
+@media (max-width: 500px) {
+    .card-wrapper {
+        padding: 15px 10px
+    }
+    .text {
+        font-size: 14px
+    }
+
+    .circle{
+    width: 20.7px;
+    height: 20.7px;
+}
+.circle.active-circle {
+    width: 5.7px;
+    height: 5.7px;
+}
+}
 </style>

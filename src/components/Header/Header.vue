@@ -17,7 +17,7 @@ export default {
 </script>
 <template>
     <header class="container header">
-        <img :src="Logo" alt="Logo" />
+        <img :src="Logo" alt="Logo" class="header-logo" />
         <HeaderButton />
     </header>
        
@@ -29,6 +29,13 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    @media (max-width: 500px) {
+        .header-logo {
+            max-width: 150px;
+            width: 100%;
+        }
     }
 
 </style>

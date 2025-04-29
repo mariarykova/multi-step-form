@@ -22,11 +22,8 @@ export default {
   },
   methods: {
     nextStep() {
-      // Step 1 validation
       if (this.step === 1) {
-        if (!this.validateStepOne()) {
-          return;
-        }
+        if (!this.validateStepOne()) return;
       }
 
       if (this.step < 4) {
@@ -40,7 +37,7 @@ export default {
     },
     validateStepOne() {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phonePattern = /^[0-9]{8,15}$/; // 8 to 15 digits
+      const phonePattern = /^[0-9]{8,15}$/;
 
       if (!emailPattern.test(this.formData.email)) {
         alert('Please enter a valid email address.');
@@ -53,10 +50,10 @@ export default {
       return true;
     },
     submitForm() {
-    localStorage.setItem('projectQuote', JSON.stringify(this.formData));
-    alert('Form submitted successfully! 🎉');
-    this.step = 1;
-    this.formData = { name: '', email: '', phone: '', company: '', service: [], budget: '' };
+      localStorage.setItem('projectQuote', JSON.stringify(this.formData));
+      alert('Form submitted successfully! 🎉');
+      this.step = 1;
+      this.formData = { name: '', email: '', phone: '', company: '', service: [], budget: '' };
   }
   }
 }
@@ -64,10 +61,9 @@ export default {
 
 <template>
   <div class="form-section">
-
     <h2 class="form-title">Get a project quote</h2>
     <p class="form-subtitle">Please fill the form below to receive a quote for your project. Feel free to add as much detail as needed.</p>
-   <div class="form-wrapper">
+    <div class="form-wrapper">
     <div class="form-container">
     <div class="progress-container">
         <div
@@ -93,7 +89,8 @@ export default {
     </div>
 
     <div class="seperated-line"></div>
-    <StepOne 
+    <div class="form-steps">
+      <StepOne 
         v-if="step === 1"
         v-model:form="formData">
     </StepOne>
@@ -113,12 +110,13 @@ export default {
         @submit="submitForm"
         >
     </StepFour>
+    </div>
    </div>
    <div class="form-btns">
     <div><button v-show="step > 1" class="previous-btn" @click="prevStep">Previous step</button></div>
     <div><button v-show="step < 4" class="next-btn" @click="nextStep">Next step</button></div>
    </div>
-</div>
+    </div>
   </div>
    
 
@@ -140,7 +138,6 @@ export default {
     margin: 0 auto;
 }
 .form-title {
-    font-family: var(--font-family);
     font-weight: 700;
     font-size: 34px;
     line-height: 135%;
@@ -148,9 +145,6 @@ export default {
     color: var(--neutral-800);
 }
 .form-subtitle {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 18px;
     line-height: 167%;
     text-align: center;
     color: var(--neutral-600);
@@ -176,13 +170,15 @@ export default {
   align-items: center;
   position: relative;
 }
+.form-steps {
+  padding: 20px 0px;
+  margin: 0 auto;
+}
 .steps {
   display: flex;
   margin-bottom: 20px;
 }
 .step {
-    font-family: var(--font-family);
-    font-weight: 400;
     font-size: 16px;
     line-height: 144%;
     color: var(--neutral-600);
@@ -205,21 +201,18 @@ export default {
   color: var(--neutral-100);
   border-color: var(--primary-color-1);
 }
-
 .line {
     position: relative;
     border-radius: 40px;
-width: 98px;
-height: 6px;
-background: var(--neutral-300);
-margin-left: 15px;
-margin-right: 15px;
+    width: 98px;
+    height: 6px;
+    background: var(--neutral-300);
+    margin-left: 15px;
+    margin-right: 15px;
 }
-
 .line.filled {
   background: var(--primary-color-1);
 }
-
 .line::before {
   content: '';
   position: absolute;
@@ -229,8 +222,6 @@ margin-right: 15px;
   background: var(--neutral-300);
   border-radius: 40px;
 }
-
-/* Right half (filled if next step is active or passed) */
 .line::after {
   content: '';
   position: absolute;
@@ -240,56 +231,101 @@ margin-right: 15px;
   background: var(--neutral-300);
   border-radius: 40px;
 }
-
 .line.half::before {
   background: var(--primary-color-1);
 }
-
 .line.filled::before,
 .line.filled::after {
   background: var(--primary-color-1);
 }
-
 .seperated-line {
     border: 1px solid var(--neutral-400);
-    width: 596px;
+    max-width: 596px;
+    width: 100%;
     height: 0px;
-   margin: 0 auto;
+    margin: 0 auto;
 }
-
 .form-btns {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
 }
-
-
 .next-btn {
     border-radius: 56px;
     padding: 20px 40px 21px 40px;
     box-shadow: 0 3px 12px 0 rgba(74, 58, 255, 0.18);
     background: var(--primary-color-1);
-    font-family: var(--font-family);
     font-weight: 700;
-    font-size: 18px;
     line-height: 111%;
     text-align: center;
     color: var(--neutral-100);
     border: none;
     cursor: pointer;
 }
-
 .previous-btn {
   border: 1px solid var(--primary-color-1);
-border-radius: 66px;
-padding: 19px 40px 21px 40px;
-font-family: var(--font-family);
-font-weight: 400;
-font-size: 18px;
-line-height: 111%;
-text-align: center;
-color: var(--primary-color-1);
-background: var(--neutral-100);
-cursor: pointer;
+  border-radius: 66px;
+  padding: 19px 40px 21px 40px;
+  font-size: 18px;
+  line-height: 111%;
+  text-align: center;
+  color: var(--primary-color-1);
+  background: var(--neutral-100);
+  cursor: pointer;
 }
+
+@media (max-width: 1025px) {
+  .form-section {
+    padding: 50px 0px;
+  }
+}
+
+  @media (max-width: 500px) {
+    .form-section {
+      padding: 25px 0px
+    }
+    .form-title {
+      font-size: 25px;
+    }
+    .form-subtitle {
+      max-width: 350px;
+      padding-bottom: 25px;
+      font-size: 12px;
+    }
+    .form-wrapper {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+    .form-container {
+    max-width: 350px;
+    padding: 25px 0px;
+    }
+    .progress-container {
+      margin-bottom: 15px;
+    }
+    .step {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+    }
+    .line {
+      width: 50px;
+    margin-left: 5px;
+    margin-right: 5px;
+    }
+    .seperated-line {
+    max-width: 300px;
+}
+
+.form-steps{
+    padding: 10px 15px;
+    margin: 0 auto;
+}
+.previous-btn, .next-btn {
+  font-size: 12px;
+  padding: 10px 15px;
+}
+
+  }
 </style>
