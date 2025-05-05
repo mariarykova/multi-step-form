@@ -1,44 +1,44 @@
 <template>
-    <h2 class="title">Contact details</h2>
-    <p class="subtitle">Please complete a form with your personal data.</p>
-    <div class="step-one-container">
-        <StepOneInput
-            v-model="form.name"
-            label="Name"
-            type="text"
-            placeholder="John Carter"
-            icon="/svg/name.svg"
-        />
-        <StepOneInput
-            v-model="form.email"
-            label="Email"
-            type="email"
-            placeholder="Email address"
-            icon="/svg/email.svg"
-        />
-        <StepOneInput
-            v-model="form.phone"
-            label="Phone number"
-            type="tel"
-            placeholder="(123) 456 - 7890"
-            icon="/svg/phone.svg"
-        />
-        <StepOneInput
-            v-model="form.company"
-            label="Company"
-            type="text"
-            placeholder="Company name"
-            icon="/svg/company.svg"
-        />
-
-    </div>
+        <h2 class="title">Contact details</h2>
+        <p class="subtitle">Please complete a form with your personal data.</p>
+        <div class="step-one-container">
+            <BaseInput
+                v-model="form.name"
+                label="Name"
+                type="text"
+                placeholder="John Carter"
+                icon="/svg/name.svg"
+            />
+            <BaseInput
+                v-model="form.email"
+                label="Email"
+                type="email"
+                placeholder="Email address"
+                icon="/svg/email.svg"
+            />
+            <BaseInput
+                v-model="form.phone"
+                label="Phone number"
+                type="tel"
+                placeholder="(123) 456 - 7890"
+                icon="/svg/phone.svg"
+                mask="(##) ####-####"
+                /> 
+            <BaseInput
+                v-model="form.company"
+                label="Company"
+                type="text"
+                placeholder="Company name"
+                icon="/svg/company.svg"
+            />
+        </div>
 </template>
 
 <script>
-import StepOneInput from './StepOneInput.vue'
+import BaseInput from '../Base/BaseInput.vue'
 
 export default {
-    components: { StepOneInput },
+    components: { BaseInput },
     props: ['form'],
 }
 </script>

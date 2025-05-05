@@ -3,41 +3,42 @@ import StepOne from './StepOne.vue'
 import StepTwo from './StepTwo.vue'
 import StepThree from './StepThree.vue'
 import StepFour from "./StepFour.vue"
+import BaseButton from '../Base/BaseButton.vue'
 
 export default {
-  components: { StepOne, StepTwo, StepThree, StepFour },
+  components: { StepOne, StepTwo, StepThree, StepFour, BaseButton },
   data() {
     return {
       step: 1,
-      steps: ['1', '2', '3', '4'],
+      steps: [1, 2, 3, 4],
       formData: {
         name: '',
         email: '',
         phone: '',
         company: '',
         service: [],
-        budget: 0,
+        budget: "",
       }
     }
   },
   methods: {
     nextStep() {
-      if (this.step === 1) {
-        if (!this.validateStepOne()) return;
-      }
-
+      console.log("next step")
+      if (this.step === 1 && !this.validateStepOne()) return;
       if (this.step < 4) {
         this.step++;
+      } else if (this.step === 4) {
+        this.submitForm();
       }
+     
     },
     prevStep() {
-      if (this.step > 1) {
-        this.step--;
-      }
+      if (this.step > 1) this.step--;
+      
     },
     validateStepOne() {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phonePattern = /^[0-9]{8,15}$/;
+      const phonePattern = /^\(\d{2}\) \d{4}-\d{4}$/;
 
       if (!emailPattern.test(this.formData.email)) {
         alert('Please enter a valid email address.');
@@ -55,7 +56,12 @@ export default {
       this.step = 1;
       this.formData = { name: '', email: '', phone: '', company: '', service: [], budget: '' };
   }
+  },
+  watch: {
+  step(newVal) {
+    console.log('Now on step', newVal);
   }
+}
 }
 </script>
 
@@ -89,37 +95,49 @@ export default {
     </div>
 
     <div class="seperated-line"></div>
+    <form @submit.prevent="nextStep">
     <div class="form-steps">
-      <StepOne 
-        v-if="step === 1"
-        v-model:form="formData">
-    </StepOne>
-    <StepTwo 
-        v-if="step === 2"
-        v-model:form="formData"
-        >
-    </StepTwo>
-    <StepThree 
-        v-if="step === 3"
-        v-model:form="formData"
-        >
-    </StepThree>
-    <StepFour 
-        v-if="step === 4"
-        v-model:form="formData"
-        @submit="submitForm"
-        >
-    </StepFour>
+
+        <StepOne 
+          v-if='step === 1'
+          v-model:form="formData"
+          >
+        </StepOne>
+        <StepTwo 
+            v-if="step === 2"
+            v-model:form="formData"
+            >
+        </StepTwo>
+        <StepThree 
+            v-if="step === 3"
+            v-model:form="formData"
+            >
+        </StepThree>
+        <StepFour 
+            v-if="step === 4"
+            v-model:form="formData"
+            >
+        </StepFour>
+    </div>
+
+
+        <div class="form-btns">
+    <div>
+      <BaseButton v-show="step > 1" variant="secondary" @click="prevStep">Previous Step</BaseButton>
+    </div>
+    <div>
+      <BaseButton 
+      v-show="step < 4" 
+      variant="primary" 
+      type="submit"
+     
+      >Next Step</BaseButton>
     </div>
    </div>
-   <div class="form-btns">
-    <div><button v-show="step > 1" class="previous-btn" @click="prevStep">Previous step</button></div>
-    <div><button v-show="step < 4" class="next-btn" @click="nextStep">Next step</button></div>
-   </div>
+      </form>
+    </div>
     </div>
   </div>
-   
-
 </template>
 
 <style scoped>
@@ -250,34 +268,31 @@ export default {
     justify-content: space-between;
     margin-top: 25px;
 }
-.next-btn {
-    border-radius: 56px;
-    padding: 20px 40px 21px 40px;
-    box-shadow: 0 3px 12px 0 rgba(74, 58, 255, 0.18);
-    background: var(--primary-color-1);
-    font-weight: 700;
-    line-height: 111%;
-    text-align: center;
-    color: var(--neutral-100);
-    border: none;
-    cursor: pointer;
-}
-.previous-btn {
-  border: 1px solid var(--primary-color-1);
-  border-radius: 66px;
-  padding: 19px 40px 21px 40px;
-  font-size: 18px;
-  line-height: 111%;
-  text-align: center;
-  color: var(--primary-color-1);
-  background: var(--neutral-100);
-  cursor: pointer;
-}
 
 @media (max-width: 1025px) {
   .form-section {
     padding: 50px 0px;
   }
+}
+
+@media (max-width: 701px) {
+  .form-subtitle {
+    max-width: 450px;
+  }
+  .line {
+    width: 65px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .form-wrapper {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-container {
+    max-width: 400px;
+    padding: 25px 25px;
+    }
 }
 
   @media (max-width: 500px) {
@@ -322,10 +337,5 @@ export default {
     padding: 10px 15px;
     margin: 0 auto;
 }
-.previous-btn, .next-btn {
-  font-size: 12px;
-  padding: 10px 15px;
-}
-
   }
 </style>

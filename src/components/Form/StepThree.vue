@@ -2,13 +2,12 @@
     <h2 class="title">What’s your project budget?</h2>
     <p class="subtitle">Please select the project budget range you have in mind.</p>
     <div class="step-three-container">
-        <StepThreeSelect
-        v-for="(budget, index) in budgets"
-        :key="index"
-        :text="budget.text"
-        :active="form.budget?.index === index"
-        @click="selectBudget(index)"
-    />
+    <StepThreeSelect
+        v-for="option in budgets"
+        :key="option.text"
+        :text="option.text"
+        v-model="form.budget"
+        />
     </div>
 </template>
 
@@ -36,15 +35,6 @@ export default {
         ]
         }
     },
-    methods: {
-        selectBudget(budgetIndex) {
-            const selectedBudget = this.budgets[budgetIndex];
-            this.form.budget = {
-                index: budgetIndex,
-                text: selectedBudget.text
-            };
-  }
-    }
 }
 
 </script>

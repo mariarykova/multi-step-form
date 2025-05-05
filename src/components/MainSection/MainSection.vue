@@ -98,7 +98,7 @@ export default {
 }
 .preview {
     border-radius: 18px;
-    max-width: 1178px;
+    max-width: 1000px;
     width: 100%;
     padding: 20px 20px;
     box-shadow: 0 12px 24px 0 rgba(20, 20, 43, 0.04), 0 -2px 4px 0 rgba(20, 20, 43, 0.02), 0 3px 14px 0 rgba(74, 58, 255, 0.03);
@@ -134,9 +134,33 @@ export default {
 
 @media (max-width: 1025px) {
     .preview {
-        max-width: 700px;
+        max-width: 600px;
     }
 }
+@media (max-width: 701px) {
+    .preview {
+        max-width: 450px;
+        padding: 15px 15px;
+    }
+    .preview-text {
+    font-size: 16px;
+}
+.preview-btn {
+    padding: 14px 20px 14px 20px;
+    font-size: 14px;
+}
+.subscription {
+    margin-bottom: 50px;
+}
+.subscription-text {
+    font-size: 14px;
+}
+.subtext {
+    max-width: 450px;
+}
+
+}
+
 @media (max-width: 500px) {
     .uptitle {
         font-size: 12px;

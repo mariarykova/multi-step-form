@@ -51,6 +51,14 @@
     color: var(--primary-color-1);
 }
 
+
+@media (max-width: 701px) {
+    .subscription-wrapper {
+        max-width: 450px;
+    }
+}
+
+
 @media (max-width: 500px) {
     .subscription-wrapper {
         max-width: 350px;

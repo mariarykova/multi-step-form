@@ -3,13 +3,12 @@
     <p class="subtitle">Please select which service you are interested in.</p>
     <div class="step-two-container">
         <StepTwoCard
-            v-for="(service, index) in services"
-            :key="index"
-            :icon="service.icon"
-            :text="service.text"
-            :active="isServiceSelected(index)"
-            @click="toggleService(index)"
-        />
+            v-for="option in services"
+            :key="option.text"
+            :text="option.text"
+            :icon="option.icon"
+            v-model="form.service"
+            />
     </div>
 </template>
 
@@ -40,25 +39,7 @@ export default {
             }
         ]
         }
-    },
-    methods: {
-        isServiceSelected(serviceIndex) {
-            return this.form.service.some(selected => selected.index === serviceIndex);
-  },
-        toggleService(serviceIndex) {
-            const selectedService = this.services[serviceIndex];
-            const idx = this.form.service.findIndex(selected => selected.index === serviceIndex);
-
-            if (idx > -1) {
-            this.form.service.splice(idx, 1);
-            } else {
-            this.form.service.push({
-                index: serviceIndex,
-                text: selectedService.text,
-            });
-            }
-        }
-            }
+    }
 }
 </script>
 

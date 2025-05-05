@@ -2,7 +2,20 @@
     <div class="input-group">
     <label class="label">{{ label }}</label>
     <div class="input-wrapper">
+    
+      <MaskInput
+        v-if="mask"
+        v-model="internalValue"
+        :type="type"
+        :placeholder="placeholder"
+        class="input"
+        :mask="mask"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
       <input
+        v-else
+        v-model="internalValue"
         :type="type"
         :placeholder="placeholder"
         :value="modelValue"
@@ -15,30 +28,34 @@
 </template>
 
 <script>
+import { MaskInput } from 'vue-3-mask'
+
+
 export default {
+  name: 'BaseInput',
+  components: { MaskInput },
   props: {
     modelValue: String,
-    label: {
-      type: String,
-      default: 'Label',
-      required: true
-    },
+    label: String,
     type: {
       type: String,
-      default: 'text',
-      required: true
+      default: 'text'
     },
-    placeholder: {
-      type: String,
-      required: false,
-      default: 'Placeholder'
-    },
-    icon: {
-      type: String,
-      required: false,
-  }
+    placeholder: String,
+    icon: String,
+    mask: String
   },
-  emits: ['update:modelValue']
+  emits: ['update:modelValue'],
+  computed: {
+    internalValue: {
+      get() {
+        return this.modelValue
+      },
+      set(val) {
+        this.$emit('update:modelValue', val)
+      }
+    }
+  }
 }
 </script>
 
@@ -72,7 +89,6 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 
 .input::placeholder {
   line-height: 111%;
